@@ -48,7 +48,7 @@ namespace eversion {
 u8 *keyBuff;
 ::SDL_Surface *screen=NULL;
 
-u32 frameRate = 20;
+u32 frameRate = 40;
 volatile u16 screenWidth=640, screenHeight=480,screenBitsPerPixel=0;
 u16 mapwinx=320, mapwiny=288;
 
@@ -296,15 +296,18 @@ int main(int argc, char *argv[])
 	game::instance()->init();
 	::SDL_Rect rc = game::instance()->getSceneRect();
 	::SDL_SetClipRect(screen, &rc);
+	
+	timer t;
 
 	while( game::instance()->isAlive() )
 	{
+		t.set(1000/frameRate);
 		eventFunc();
 		drawFunc();
 
 		game::instance()->update();
 
- 		::SDL_Delay(1000/frameRate);
+ 		::SDL_Delay(t.get());
 	}
 
 	if(screen)
