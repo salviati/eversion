@@ -297,18 +297,14 @@ int main(int argc, char *argv[])
 	::SDL_Rect rc = game::instance()->getSceneRect();
 	::SDL_SetClipRect(screen, &rc);
 
-	timer t;
-
 	while( game::instance()->isAlive() )
 	{
-		t.set(frameRate);
-
 		eventFunc();
 		drawFunc();
 
 		game::instance()->update();
 
-		while(t.get())	{} //keep looping until timer expires
+ 		::SDL_Delay(1000/frameRate);
 	}
 
 	if(screen)
