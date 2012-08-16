@@ -1,4 +1,0 @@
-eversion
-========
-
-A CRPG engine

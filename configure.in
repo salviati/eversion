@@ -1,0 +1,49 @@
+AC_INIT
+
+
+dnl we'll need to determine cpu type
+AC_CANONICAL_SYSTEM
+
+AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(eversion, 1.0.0)
+
+INTERFACE=sdl
+
+AC_ARG_WITH(extra-opt,
+	    [  --with-extra-opt        Add extra optimizations (egcs/GCC >= 2.95 only)],
+	    ADD_OPT=$withval,
+	    ADD_OPT=no)
+
+CFLAGS="$CFLAGS -g -funroll-loops -frerun-cse-after-loop -ffast-math -fomit-frame-pointer -fexpensive-optimizations -pipe -fno-exceptions -fno-rtti"
+CXXFLAGS="$CXXFLAGS -g -funroll-loops -frerun-cse-after-loop -ffast-math -fomit-frame-pointer -fexpensive-optimizations -pipe -fno-exceptions -fno-rtti"
+
+AC_PROG_CC
+AC_LANG_C
+AC_PROG_CXX
+AM_PROG_AS
+AC_LANG_CPLUSPLUS
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+AC_ISC_POSIX
+AM_PROG_CC_C_O
+
+AC_HEADER_STDC
+
+AC_CHECK_FUNCS(itoa)
+
+AM_PATH_SDL(1.0.0, true, AC_MSG_ERROR([*** SDL version >= 1.0.0 not found.]))
+
+
+
+
+CFLAGS="$CFLAGS $SDL_CFLAGS -Wall -ansi -pedantic"
+AC_SUBST(CFLAGS)
+
+CXXFLAGS="$CFLAGS $SDL_CFLAGS -Wall -ansi -pedantic -O2 -funroll-loops -ffast-math -fomit-frame-pointer -fexpensive-optimizations -pipe"
+AC_SUBST(CXXFLAGS)
+
+LIBS="$SDL_LIBS -lSDL_net -lSDL_image"
+
+AC_CONFIG_FILES(Makefile src/Makefile data/Makefile)
+
+AC_OUTPUT

@@ -1,0 +1,10 @@
+Eversion is a console-style RPG engine, an old piece of code I wrote back in 2002-2004.
+Did some minor cleanups before moving the codebase to github.
+
+Requires SDL, SDL_image and SDL_net.
+Just run ./configure && make to compile and src/eversion to run the game.
+Send bugs & improvements to utkan@freeconsole.org.
+
+Code released under GNU LGPLv3.
+I have no idea about the origins of the image files (sprites) under data/*, please drop me a line if you know.
+They are being used under fair use, and I'd be more than happy to replace them with free alternatives.
